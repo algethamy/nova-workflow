@@ -1,0 +1,50 @@
+Arguments: 
+  /Users/a.algethami/.nvm/versions/node/v6.14.3/bin/node /Users/a.algethami/.yarn/bin/yarn.js
+
+PATH: 
+  /Users/a.algethami/.nvm/versions/node/v6.14.3/bin:/Users/a.algethami/.yarn/bin:/Users/a.algethami/.config/yarn/global/node_modules/.bin:/Users/a.algethami/bin:/usr/local/bin:/Users/a.algethami/bin:/Users/abdullah/Code/spark-installer:/Users/a.algethami/.composer/vendor/bin/:/usr/local/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Users/a.algethami/Code/nova/node_modules/.bin:/Users/a.algethami/.composer/vendor/bin:~/bin:/Users/abdullah/Code/spark-installer:/Users/a.algethami/.composer/vendor/bin/:/usr/local/bin
+
+Yarn version: 
+  1.7.0
+
+Node version: 
+  6.14.3
+
+Platform: 
+  darwin x64
+
+Trace: 
+  SyntaxError: /Users/a.algethami/Code/nova/nova-components/Workflow/package.json: Unexpected token } in JSON at position 1066
+      at Object.parse (native)
+      at /Users/a.algethami/.yarn/lib/cli.js:1130:59
+      at next (native)
+      at step (/Users/a.algethami/.yarn/lib/cli.js:98:30)
+      at /Users/a.algethami/.yarn/lib/cli.js:109:13
+
+npm manifest: 
+  {
+      "private": true,
+      "scripts": {
+          "dev": "npm run development",
+          "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+          "watch": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --watch --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
+          "watch-poll": "npm run watch -- --watch-poll",
+          "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --config=node_modules/laravel-mix/setup/webpack.config.js",
+          "prod": "npm run production",
+          "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js"
+      },
+      "devDependencies": {
+          "cross-env": "^5.0.0",
+          "laravel-mix": "^1.0"
+      },
+      "dependencies": {
+          "vue": "^2.5.0",
+          "laravel-nova": "^1.0.3",
+      }
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
