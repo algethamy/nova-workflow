@@ -1,5 +1,5 @@
 {
-    "name": "cammac/workflow",
+    "name": "cammac/nova-workflow",
     "description": "A Laravel Nova resource tool.",
     "keywords": [
         "laravel",
