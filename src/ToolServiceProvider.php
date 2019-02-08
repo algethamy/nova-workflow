@@ -28,7 +28,7 @@ class ToolServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__.'/../config/workflow.php' => config_path('workflow.php'),
-        ], 'nova-config');
+        ], 'workflow');
     }
 
     /**

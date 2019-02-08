@@ -1,29 +1,28 @@
 <?php
 
-use App\Request;
 
 return [
     'workflows' => [
 
-        'request' => [
-            'model'       => Request::class,
-            'column'      => 'status',
-            'states'      => [
+        'request' => [ // workflow name
+            'model'       => \App\Request::class, //workflow applied to this model
+            'column'      => 'status', // on this column
+            'states'      => [ // the possible statuses
                 'pending',
                 'escalated',
                 'approved',
                 'rejected',
             ],
+
             'transitions' => [
                 'Approve'  => [
                     'from'  => ['pending', 'escalated'],
                     'to'    => 'approved',
-                    'event' => \App\Events\RequestApproved::class,
+                    'event' => \App\Events\RequestApproved::class, // fire event
                 ],
                 'Escalate' => [
                     'from'         => ['pending'],
                     'to'           => 'escalated',
-                    'with_reasons' => 'escalation_note', // the column name
                 ],
                 'Reject'   => [
                     'from'         => ['pending', 'escalated'],
@@ -31,16 +30,16 @@ return [
                     'with_reasons' => [ // to create a dropdown
                         'model'   => \App\RejectionReason::class,
                         'columns' => [
-                            'id'    => 'id',
-                            'label' => 'title',
+                            'id'    => 'id', // value of the option
+                            'label' => 'title', // option label
                         ],
                     ],
                 ],
 
-
                 'Back to My Employee' => [
                     'from' => ['escalated'],
                     'to'   => 'pending',
+                    'with_reasons' => 'escalation_note', // display a free textarea to write the comment on the this column name
                 ],
             ],
         ],
