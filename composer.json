@@ -1,0 +1,30 @@
+{
+    "name": "cammac/workflow",
+    "description": "A Laravel Nova resource tool.",
+    "keywords": [
+        "laravel",
+        "nova"
+    ],
+    "license": "MIT",
+    "require": {
+        "php": ">=7.1.0",
+        "winzou/state-machine": "^0.3.3"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cammac\\Workflow\\": "src/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Cammac\\Workflow\\ToolServiceProvider"
+            ]
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
