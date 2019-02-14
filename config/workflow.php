@@ -19,6 +19,7 @@ return [
                     'from'  => ['pending', 'escalated'],
                     'to'    => 'approved',
                     'event' => \App\Events\RequestApproved::class, // fire event
+                    'style_classes' => 'bg-success text-20'
                 ],
                 'Escalate' => [
                     'from'         => ['pending'],
@@ -34,6 +35,7 @@ return [
                             'label' => 'title', // option label
                         ],
                     ],
+                    'style_classes' => 'bg-danger text-20'
                 ],
 
                 'Back to My Employee' => [

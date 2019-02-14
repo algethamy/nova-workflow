@@ -1,7 +1,7 @@
 <template>
   <div class="flex" v-if="Object.keys(transactions).length > 0">
     <div class="flex-1 m-1" v-for="(showModal, transaction) in transactions">
-      <button class="bg-50 w-full btn m-1 p-2 rounded" @click.prevent="openModal(transaction)">{{transaction}}</button>
+      <button class="bg-50 w-full btn m-1 p-2 rounded" :class="classes(transaction)" @click.prevent="openModal(transaction)">{{transaction}}</button>
       <modal v-if="showModal" @modal-close="close(transaction)">
         <form
             class="bg-white rounded-lg shadow-lg overflow-hidden"
@@ -68,6 +68,10 @@
         this.transactions[transaction] = false;
 
         this.$emit('close')
+      },
+
+      classes(transaction) {
+        return this.field.styles[transaction];
       },
 
       reasons(transaction) {

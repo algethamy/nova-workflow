@@ -32,14 +32,10 @@ class Workflow extends ResourceTool
 
             $this->fetch_reasons($workflow, $array);
 
-            $transactions = [];
-            foreach ($array as $trans) {
-                $transactions[$trans] = false;
-            }
-
             $this->withMeta([
                 'workflow'     => $workflow_name,
-                'transactions' => $transactions,
+                'transactions' => $this->get_transitions($array),
+                'styles' => $this->get_styles($workflow),
             ]);
 
 
@@ -71,7 +67,7 @@ class Workflow extends ResourceTool
      * @param array $workflow
      * @param array $array
      */
-    protected function fetch_reasons($workflow, array $array)
+    protected function fetchReasons($workflow, array $array)
     {
         collect($workflow['transitions'])->filter(function ($trans, $trans_label) use ($array) {
             return in_array($trans_label, $array) && array_key_exists('with_reasons', $trans);
@@ -104,5 +100,24 @@ class Workflow extends ResourceTool
         $this->withMeta([
             "reasons" => collect(data_get($this, 'element.meta.reasons', []))->merge($reasons),
         ]);
+    }
+
+    private function get_transitions(array $array)
+    {
+        $transactions = [];
+        foreach ($array as $trans) {
+            $transactions[$trans] = false;
+        }
+
+        return $transactions;
+    }
+
+    private function get_styles(Collection $workflow)
+    {
+        return collect($workflow->get('transitions'))->reject(function ($trans) {
+            return !isset($trans['style_classes']);
+        })->map(function ($trans) {
+            return $trans['style_classes'];
+        })->toArray();
     }
 }

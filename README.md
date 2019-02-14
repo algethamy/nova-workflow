@@ -37,6 +37,7 @@ you can define inside `workflows` element workflow name and it's config as follo
 | from           | Yes        | array: From states                                                                                                     | 
 | to             | Yes        | To state                                                                                                               | 
 | event          | No         | Event class that will be fired after the transition is completed                                                       | 
+| style_classes  | No         | apply your css classes                                                                                                 | 
 | with_reasons   | No         | string: column inside your model will be filled with the transition                                                    | 
 | with_reasons   | No         | array:  will generate a dropdown list from with_reasons.model with `id` as option's value and `label` as option's text | 
 
