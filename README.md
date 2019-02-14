@@ -1,6 +1,6 @@
 # Workflow Resource Tool for Laravel Nova
 
-This package helps you to create workflow on your Nova application
+This package helps you to create workflow on your Nova application. It's built on top of this package  [winzou/state-machine](https://github.com/winzou/state-machine)
 
 ![screenshot](./diagram.png)
 
@@ -22,6 +22,24 @@ php artisan vendor:publish --tag  workflow
 ```
 
 open `config/workflow.php` and define your workflow
+
+## Configuration
+
+
+you can define inside `workflows` element workflow name and it's config as following:
+
+| field          | mandatory  | Description                                                                                                            |
+| -------------- | ---------- | ---------------------------------------------------------------------------------------------------------------------- |
+| model          | Yes        | Model class you want to do your workflow on                                                                            |
+| column         | Yes        | Column name you want to monitor                                                                                        | 
+| states         | Yes        | All possible states                                                                                                    | 
+| transitions    | Yes        | All possible transitions                                                                                               | 
+| from           | Yes        | array: From states                                                                                                     | 
+| to             | Yes        | To state                                                                                                               | 
+| event          | No         | Event class that will be fired after the transition is completed                                                       | 
+| with_reasons   | No         | string: column inside your model will be filled with the transition                                                    | 
+| with_reasons   | No         | array:  will generate a dropdown list from with_reasons.model with `id` as option's value and `label` as option's text | 
+
 
 ## Usage
 
