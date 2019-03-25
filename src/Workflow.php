@@ -35,7 +35,7 @@ class Workflow extends ResourceTool
             $this->withMeta([
                 'workflow'     => $workflow_name,
                 'transactions' => $this->get_transitions($array),
-                'styles' => $this->get_styles($workflow),
+                'styles'       => $this->get_styles($workflow),
             ]);
 
 
@@ -71,10 +71,10 @@ class Workflow extends ResourceTool
     public function jsonSerialize()
     {
         return array_merge([
-            'component' => 'panel',
-            'name' => $this->name,
+            'component'   => 'panel',
+            'name'        => $this->name,
             'showToolbar' => $this->showToolbar,
-        ], $this->meta());
+        ], $this->element->meta());
     }
 
     /**
