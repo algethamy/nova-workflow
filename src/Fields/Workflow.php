@@ -1,33 +1,39 @@
 <?php
 
-namespace Cammac\Workflow;
+namespace Cammac\Workflow\Fields;
 
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Laravel\Nova\ResourceTool;
 
-class Workflow
+class Workflow extends ResourceTool
 {
-    public $SM;
-    public $workflow = [];
+    private $hide = false;
 
+    public $SM;
     /**
      * Workflow constructor.
      * @param string $workflow_name
-     * @throws ModelNotFoundException
      */
-    public function __construct(string $workflow_name, $workflow_model_id)
+    public function __construct(string $workflow_name)
     {
-        $this->workflow = collect(config("workflow.workflows." . $workflow_name));
+        parent::__construct();
 
-        $this->workflow = $this->workflow->merge(['property_path' => $this->workflow['column']]);
+        try {
+            $object = new \Cammac\Workflow\Workflow($workflow_name, array_last(request()->segments()));
 
-        /** @var \Illuminate\Database\Eloquent\Model $model */
-        $model = app($this->workflow['model'])->findOrFail($workflow_model_id);
+            $array = $object->SM->getPossibleTransitions();
 
-        $this->SM = new \SM\StateMachine\StateMachine($model, $this->workflow->toArray());
+            $this->fetch_reasons($object->workflow, $array);
 
-        return $this->SM;
+            $this->withMeta([
+                'workflow'     => $workflow_name,
+                'transactions' => $this->get_transitions($array),
+                'styles'       => $this->get_styles($object->workflow),
+                'actions'      => $this->get_actions($object->workflow, $array),
+            ]);
+        } catch (ModelNotFoundException $e) {
+        }
     }
 
     /**
@@ -125,8 +131,8 @@ class Workflow
     private function get_actions(Collection $workflow, array $array)
     {
         return collect($workflow->get('transitions'))->filter(function ($trans, $trans_label) use ($array) {
-            return in_array($trans_label, $array) && isset($trans['action']);
-        })
+                return in_array($trans_label, $array) && isset($trans['action']);
+            })
             ->map(function ($trans) {
                 /** @var \Laravel\Nova\Actions\Action $action */
                 $action = app($trans['action']);
