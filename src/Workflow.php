@@ -2,6 +2,7 @@
 
 namespace Cammac\Workflow;
 
+use Arr;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Collection;
 use Laravel\Nova\ResourceTool;
@@ -24,7 +25,8 @@ class Workflow extends ResourceTool
             $workflow = $workflow->merge(['property_path' => $workflow['column']]);
 
             /** @var \Illuminate\Database\Eloquent\Model $model */
-            $model = app($workflow['model'])->findOrFail(array_last(request()->segments()));
+            // $model = app($workflow['model'])->findOrFail(array_last(request()->segments()));
+            $model = app($workflow['model'])->findOrFail(Arr::last(request()->segments()));
 
             $stateMachine = new \SM\StateMachine\StateMachine($model, $workflow->toArray());
 
