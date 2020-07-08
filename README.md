@@ -49,6 +49,11 @@ To display the workflow that are associated with a given Nova resource, you need
 For example, in your `app/Nova/Order.php` file:
 
 ```php
+
+use Cammac\Workflow\Workflow;
+
+...
+
 public function fields(Request $request)
 {
     return [
